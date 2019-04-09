@@ -93,6 +93,7 @@
             </ComboBox>
 
             <Label x:Name="errorMessage" FontSize="14" Foreground="Red" Content="" HorizontalAlignment="Left" Margin="400,123,0,0" VerticalAlignment="Top" Width="640" Height="47" />
+            <Label x:Name="label" FontSize="16" FontFamily="Bookman Old Style" Foreground="Coral" Content="Top 5 favourite cities: " HorizontalAlignment="Left" Margin="885,9,0,0" VerticalAlignment="Top" Width="213"/>
 
 
 

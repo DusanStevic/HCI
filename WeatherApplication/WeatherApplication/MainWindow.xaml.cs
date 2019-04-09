@@ -300,7 +300,6 @@ namespace WeatherApplication
             {
                 if (brojacTime == 1)
                 {
-
                     clock1.Text = l.dt_txt.Split(' ')[1].Split(':')[0] + ":" + l.dt_txt.Split(' ')[1].Split(':')[1];
                     time1.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.main.speed.ToString() + " m/s\n" + l.weather[0].description;
                     BitmapImage bitmap0 = new BitmapImage();
@@ -386,7 +385,26 @@ namespace WeatherApplication
 
         private void changeWindowInfo()
         {
-            //LEONA
+            if (!loadedData.failed)
+            {
+                this.Forecast.Text = "Forecast";
+                fillInTodayInfo();
+                List<list> list1 = new List<list>();
+                List<list> list2 = new List<list>();
+                List<list> list3 = new List<list>();
+                List<list> list4 = new List<list>();
+                List<list> list5 = new List<list>();
+                fillInLists(list1, list2, list3, list4, list5, loadedData.weatherForecast.list);
+                addingHourData(list1);
+                dataForOtherDays(list2, day2, day22, list2[4].weather[0].icon, day222);
+                dataForOtherDays(list3, day3, day33, list3[4].weather[0].icon, day333);
+                dataForOtherDays(list4, day4, day44, list4[4].weather[0].icon, day444);
+                dataForOtherDays(list5, day5, day55, list5[4].weather[0].icon, day555);
+            }
+            else
+            {
+                this.errorMessage.Content = "Could not load the data. Please check your internet connection and try again.";
+            }
         }
 
         private void CityButton_Click(object sender, RoutedEventArgs e)
