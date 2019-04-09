@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace WeatherApplication
 {
+
     public class WeatherForcast
     {
         public city city { get; set; }
@@ -22,6 +23,7 @@ namespace WeatherApplication
         public main main { get; set; }
         public List<weather> weather { get; set; }
         public string dt_txt { get; set; }
+        public wind wind { get; set; }
     }
 
     public class main
@@ -29,7 +31,11 @@ namespace WeatherApplication
         public double temp { get; set; }
         public double humidity { get; set; }
         public double pressure { get; set; }
-        public double speed { get; set; }
+    }
+
+    public class wind
+    {
+        public double speed;
     }
 
     public class weather

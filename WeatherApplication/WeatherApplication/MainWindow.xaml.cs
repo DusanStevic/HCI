@@ -178,38 +178,37 @@ namespace WeatherApplication
             {
 
                 string datum = l.dt_txt.Split(' ')[0];
-                if (datum.Equals(datumm) == true)
-                {
-                    if (brojac == 1)
-                    {
-                        l1.Add(l);
-                    }
-                    else if (brojac == 2)
-                    {
-                        l2.Add(l);
 
-                    }
-                    else if (brojac == 3)
-                    {
-                        l3.Add(l);
-                    }
-                    else if (brojac == 4)
-                    {
-                        l4.Add(l);
-                    }
-                    else
-                    {
-                        l5.Add(l);
-                    }
-                }
-                else
+                if (datum!=datumm)
                 {
                     brojac++;
                     datumm = datum;
                 }
+               
+                if (brojac == 1)
+                {
+                    l1.Add(l);
+                }
+                else if (brojac == 2)
+                {
+                    l2.Add(l);
+
+                }
+                else if (brojac == 3)
+                {
+                    l3.Add(l);
+                }
+                else if (brojac == 4)
+                {
+                    l4.Add(l);
+                }
+                else
+                {
+                    l5.Add(l);
+                }
             }
 
-            if (l1.Count() != 8)
+            if (l1.Count() < 8)
             {
                 int manjak = 8 - l1.Count();
                 for (int i = 0; i < manjak; i++)
@@ -217,6 +216,8 @@ namespace WeatherApplication
                     l1.Add(l2.ElementAt(i));
                 }
             }
+
+
         }
 
         private void fillInTodayInfo()
@@ -300,8 +301,9 @@ namespace WeatherApplication
             {
                 if (brojacTime == 1)
                 {
+
                     clock1.Text = l.dt_txt.Split(' ')[1].Split(':')[0] + ":" + l.dt_txt.Split(' ')[1].Split(':')[1];
-                    time1.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.main.speed.ToString() + " m/s\n" + l.weather[0].description;
+                    time1.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.wind.speed.ToString() + " m/s\n" + l.weather[0].description;
                     BitmapImage bitmap0 = new BitmapImage();
                     bitmap0.BeginInit();
                     bitmap0.UriSource = new Uri(fullFilePath0, UriKind.Absolute);
@@ -311,7 +313,7 @@ namespace WeatherApplication
                 else if (brojacTime == 2)
                 {
                     clock2.Text = l.dt_txt.Split(' ')[1].Split(':')[0] + ":" + l.dt_txt.Split(' ')[1].Split(':')[1];
-                    time2.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.main.speed.ToString() + " m/s\n" + l.weather[0].description;
+                    time2.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.wind.speed.ToString() + " m/s\n" + l.weather[0].description;
                     BitmapImage bitmap1 = new BitmapImage();
                     bitmap1.BeginInit();
                     bitmap1.UriSource = new Uri(fullFilePath1, UriKind.Absolute);
@@ -321,7 +323,7 @@ namespace WeatherApplication
                 else if (brojacTime == 3)
                 {
                     clock3.Text = l.dt_txt.Split(' ')[1].Split(':')[0] + ":" + l.dt_txt.Split(' ')[1].Split(':')[1];
-                    time3.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.main.speed.ToString() + " m/s\n" + l.weather[0].description;
+                    time3.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.wind.speed.ToString() + " m/s\n" + l.weather[0].description;
                     BitmapImage bitmap2 = new BitmapImage();
                     bitmap2.BeginInit();
                     bitmap2.UriSource = new Uri(fullFilePath2, UriKind.Absolute);
@@ -331,7 +333,7 @@ namespace WeatherApplication
                 else if (brojacTime == 4)
                 {
                     clock4.Text = l.dt_txt.Split(' ')[1].Split(':')[0] + ":" + l.dt_txt.Split(' ')[1].Split(':')[1];
-                    time4.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.main.speed.ToString() + " m/s\n" + l.weather[0].description;
+                    time4.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.wind.speed.ToString() + " m/s\n" + l.weather[0].description;
                     BitmapImage bitmap3 = new BitmapImage();
                     bitmap3.BeginInit();
                     bitmap3.UriSource = new Uri(fullFilePath3, UriKind.Absolute);
@@ -341,7 +343,7 @@ namespace WeatherApplication
                 else if (brojacTime == 5)
                 {
                     clock5.Text = l.dt_txt.Split(' ')[1].Split(':')[0] + ":" + l.dt_txt.Split(' ')[1].Split(':')[1];
-                    time5.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.main.speed.ToString() + " m/s\n" + l.weather[0].description;
+                    time5.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.wind.speed.ToString() + " m/s\n" + l.weather[0].description;
                     BitmapImage bitmap4 = new BitmapImage();
                     bitmap4.BeginInit();
                     bitmap4.UriSource = new Uri(fullFilePath4, UriKind.Absolute);
@@ -351,7 +353,7 @@ namespace WeatherApplication
                 else if (brojacTime == 6)
                 {
                     clock6.Text = l.dt_txt.Split(' ')[1].Split(':')[0] + ":" + l.dt_txt.Split(' ')[1].Split(':')[1];
-                    time6.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.main.speed.ToString() + " m/s\n" + l.weather[0].description;
+                    time6.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.wind.speed.ToString() + " m/s\n" + l.weather[0].description;
                     BitmapImage bitmap5 = new BitmapImage();
                     bitmap5.BeginInit();
                     bitmap5.UriSource = new Uri(fullFilePath5, UriKind.Absolute);
@@ -361,7 +363,7 @@ namespace WeatherApplication
                 else if (brojacTime == 7)
                 {
                     clock7.Text = l.dt_txt.Split(' ')[1].Split(':')[0] + ":" + l.dt_txt.Split(' ')[1].Split(':')[1];
-                    time7.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.main.speed.ToString() + " m/s\n" + l.weather[0].description;
+                    time7.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.wind.speed.ToString() + " m/s\n" + l.weather[0].description;
                     BitmapImage bitmap6 = new BitmapImage();
                     bitmap6.BeginInit();
                     bitmap6.UriSource = new Uri(fullFilePath6, UriKind.Absolute);
@@ -371,7 +373,7 @@ namespace WeatherApplication
                 else if (brojacTime == 8)
                 {
                     clock8.Text = l.dt_txt.Split(' ')[1].Split(':')[0] + ":" + l.dt_txt.Split(' ')[1].Split(':')[1];
-                    time8.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.main.speed.ToString() + " m/s\n" + l.weather[0].description;
+                    time8.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.wind.speed.ToString() + " m/s\n" + l.weather[0].description;
                     BitmapImage bitmap7 = new BitmapImage();
                     bitmap7.BeginInit();
                     bitmap7.UriSource = new Uri(fullFilePath7, UriKind.Absolute);
@@ -395,6 +397,7 @@ namespace WeatherApplication
                 List<list> list4 = new List<list>();
                 List<list> list5 = new List<list>();
                 fillInLists(list1, list2, list3, list4, list5, loadedData.weatherForecast.list);
+                
                 addingHourData(list1);
                 dataForOtherDays(list2, day2, day22, list2[4].weather[0].icon, day222);
                 dataForOtherDays(list3, day3, day33, list3[4].weather[0].icon, day333);
