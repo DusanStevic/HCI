@@ -1,4 +1,5 @@
 ﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -23,7 +24,6 @@ namespace WeatherApplication
     /// </summary>
     public partial class MainWindow : Window
     {
-
         public ObservableCollection<string> Favourites { get; set; }
         public ObservableCollection<string> PomocniFavourites { get; set; }
         int brojacTrazenja = 0;
@@ -32,7 +32,7 @@ namespace WeatherApplication
             get; set;
         }
         WeatherLoader loadedData;
-       
+        LoadTimer timer;
 
         public void ReadFavourites()
         {
@@ -107,20 +107,128 @@ namespace WeatherApplication
             }
 
         }
+        public MainWindow()
+        {
+            Favourites = new ObservableCollection<string>();
+            PomocniFavourites = new ObservableCollection<string>();
+            ReadFavourites();
+            Locator locator = new Locator();
+            string errorMessage = "";
+            if (locator._lat != -11111 && locator._lon != -11111)
+            {
+                loadedData = new WeatherLoader(locator._lat, locator._lon);
 
-        private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+            }
+            else
+            {
+                Console.WriteLine("Could not find location. Default location is London.");
+                errorMessage = "Could not find your location. Please search the city for which you want to see the weather forecast.";
+                loadedData = new WeatherLoader("London");
+            }
+            timer = new LoadTimer(this);
+            this.DataContext = this;
+            InitializeComponent();
+            if (errorMessage != "")
+            {
+                this.errorMessage.Content = errorMessage;
+            }
+            FoundCityName.IsReadOnly = true;
+            CurrentTemp.IsReadOnly = true;
+            Description.IsReadOnly = true;
+            Forecast.IsReadOnly = true;
+            day2.IsReadOnly = true;
+            day22.IsReadOnly = true;
+            day3.IsReadOnly = true;
+            day33.IsReadOnly = true;
+            day4.IsReadOnly = true;
+            day44.IsReadOnly = true;
+            day5.IsReadOnly = true;
+            day55.IsReadOnly = true;
+            time1.IsReadOnly = true;
+            time2.IsReadOnly = true;
+            time3.IsReadOnly = true;
+            time4.IsReadOnly = true;
+            time5.IsReadOnly = true;
+            time6.IsReadOnly = true;
+            time7.IsReadOnly = true;
+            time8.IsReadOnly = true;
+            clock1.IsReadOnly = true;
+            clock2.IsReadOnly = true;
+            clock3.IsReadOnly = true;
+            clock4.IsReadOnly = true;
+            clock5.IsReadOnly = true;
+            clock6.IsReadOnly = true;
+            clock7.IsReadOnly = true;
+            clock8.IsReadOnly = true;
+            update.IsReadOnly = true;
+            dataForDefault();
+        }
+
+        private void dataForDefault()
+        {
+            //DUSAN
+        }
+
+        private void fillInLists(List<list> l1, List<list> l2, List<list> l3, List<list> l4, List<list> l5,
+            List<list> mainList)
+        {
+            string datumm = mainList[0].dt_txt.Split(' ')[0];
+            int brojac = 1;
+
+            foreach (list l in mainList)
+            {
+
+                string datum = l.dt_txt.Split(' ')[0];
+                if (datum.Equals(datumm) == true)
+                {
+                    if (brojac == 1)
+                    {
+                        l1.Add(l);
+                    }
+                    else if (brojac == 2)
+                    {
+                        l2.Add(l);
+
+                    }
+                    else if (brojac == 3)
+                    {
+                        l3.Add(l);
+                    }
+                    else if (brojac == 4)
+                    {
+                        l4.Add(l);
+                    }
+                    else
+                    {
+                        l5.Add(l);
+                    }
+                }
+                else
+                {
+                    brojac++;
+                    datumm = datum;
+                }
+            }
+
+            if (l1.Count() != 8)
+            {
+                int manjak = 8 - l1.Count();
+                for (int i = 0; i < manjak; i++)
+                {
+                    l1.Add(l2.ElementAt(i));
+                }
+            }
+        }
+
+        private void fillInTodayInfo()
         {
 
-            String cbi = (String)(sender as ComboBox).SelectedItem;
-            City = cbi;
-            bool success = loadedData.updateCity(City);
-            if (success)
-            {
-                update.Text = "Last updated: " + string.Format("{0:HH:mm:ss}", DateTime.Now);
-                this.errorMessage.Content = "";
-                this.CityText.Text = City;
-                changeWindowInfo();
-            }
+            //SONJA
+        }
+
+        private void dataForOtherDays(List<list> listName, TextBox field1, TextBox field2, string nazivSlike, Image poljeSlika)
+        {
+            //SONJA
         }
 
         private void addingHourData(List<list> listData)
@@ -226,6 +334,16 @@ namespace WeatherApplication
 
         }
 
+        private void changeWindowInfo()
+        {
+            //LEONA
+        }
+
+        private void CityButton_Click(object sender, RoutedEventArgs e)
+        {
+            //LEONA
+
+        }
         private void checkBox_Click(object sender, RoutedEventArgs e)
         {
             City = this.CityText.Text;
@@ -255,36 +373,69 @@ namespace WeatherApplication
                 }
 
             }
+            else
+            {
+                this.errorMessage.Content = "";
+            }
             WriteFavorites();
         }
 
-
-
-        public MainWindow()
+        private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           
-            Locator locator = new Locator();
-            string errorMessage = "";
-            if (locator._lat != -11111 && locator._lon != -11111)
-            {
-                loadedData = new WeatherLoader(locator._lat, locator._lon);
 
-            }
-            else
+            String cbi = (String)(sender as ComboBox).SelectedItem;
+            City = cbi;
+            bool success = loadedData.updateCity(City);
+            if (success)
             {
-                Console.WriteLine("Could not find location. Default location is London.");
-                errorMessage = "Could not find your location. Please search the city for which you want to see the weather forecast.";
-                loadedData = new WeatherLoader("London");
+                update.Text = "Last updated: " + string.Format("{0:HH:mm:ss}", DateTime.Now);
+                this.errorMessage.Content = "";
+                this.CityText.Text = City;
+                changeWindowInfo();
             }
-            
-            
+        }
+
+        public void automaticUpdate()
+        {
+            bool updated = loadedData.update();
+            if (updated)
+            {
+                this.Dispatcher.Invoke(() =>
+                {
+                    update.Text = "Last updated: " + string.Format("{0:HH:mm:ss}", DateTime.Now);
+                    this.errorMessage.Content = "";
+                    changeWindowInfo();
+                });
+            }
 
         }
 
-      
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
-      
+        }
 
-      
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            loadedData.updateCity(City);
+            bool updated = loadedData.update();
+            if (updated)
+            {
+                update.Text = "Last updated: " + string.Format("{0:HH:mm:ss}", DateTime.Now);
+                this.errorMessage.Content = "";
+                Console.WriteLine("Application was just updated.");
+                changeWindowInfo();
+            }
+        }
+
+        private void clock1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void checkBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

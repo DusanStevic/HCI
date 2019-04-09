@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="LoadTimer.cs" />
     <Compile Include="Locator.cs" />
     <Compile Include="WeatherForecast.cs" />
     <Compile Include="WeatherInfo.cs" />
