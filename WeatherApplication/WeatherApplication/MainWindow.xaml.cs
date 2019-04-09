@@ -108,7 +108,39 @@ namespace WeatherApplication
 
         }
 
-       
+        private void checkBox_Click(object sender, RoutedEventArgs e)
+        {
+            City = this.CityText.Text;
+            if (checkBox.IsChecked == true)
+            {
+                if (loadedData.cityExists(City) == true)
+                {
+                    if (PomocniFavourites.Contains(City.ToUpper()) == false)
+                    {
+                        Favourites.Add(City);
+                        PomocniFavourites.Add(City.ToUpper());
+                        if (Favourites.Count() == 6)
+                        {
+                            Favourites.RemoveAt(0);
+                            PomocniFavourites.RemoveAt(0);
+                        }
+                        this.errorMessage.Content = "";
+                    }
+                    else
+                    {
+                        this.errorMessage.Content = "City is already added to favourites.";
+                    }
+                }
+                else
+                {
+                    this.errorMessage.Content = "City couldn't be added to favourites. Please check the spelling and internet connection.";
+                }
+
+            }
+            WriteFavorites();
+        }
+
+
 
         public MainWindow()
         {
