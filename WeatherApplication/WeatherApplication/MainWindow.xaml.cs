@@ -391,8 +391,26 @@ namespace WeatherApplication
 
         private void CityButton_Click(object sender, RoutedEventArgs e)
         {
-            //LEONA
-
+            if (brojacTrazenja != 0)
+            {
+                checkBox.IsChecked = false;
+            }
+            if (!loadedData.failed)
+            {
+                City = this.CityText.Text;
+                bool success = loadedData.updateCity(City);
+                if (success)
+                {
+                    this.errorMessage.Content = "";
+                    update.Text = "Last updated: " + string.Format("{0:HH:mm:ss}", DateTime.Now);
+                    changeWindowInfo();
+                }
+                else
+                {
+                    this.errorMessage.Content = "City is not found. Please check the spelling and internet connection.";
+                }
+            }
+            brojacTrazenja++;
         }
         private void checkBox_Click(object sender, RoutedEventArgs e)
         {
