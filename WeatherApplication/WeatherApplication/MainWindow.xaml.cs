@@ -1,5 +1,4 @@
 ﻿using System;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -222,8 +221,23 @@ namespace WeatherApplication
 
         private void fillInTodayInfo()
         {
+            var fullFilePath = $"http://openweathermap.org/img/w/{loadedData.weatherInfo.weather[0].icon}.png";
+            Console.WriteLine(loadedData.weatherInfo.weather[0].icon);
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
+            bitmap.EndInit();
 
-            //SONJA
+
+            this.WeatherIcon.Source = bitmap;
+            this.FoundCityName.Text = loadedData.weatherInfo.name + ", " + loadedData.weatherInfo.sys.country;
+            this.CurrentTemp.Text = Math.Round(loadedData.weatherInfo.main.temp, 0).ToString() + "°C";
+            this.Description.Text = "Wind: " + loadedData.weatherInfo.wind.speed.ToString() + " m/s\n" +
+                                    "Cloudness: " + loadedData.weatherInfo.clouds.all.ToString() + " %\n" +
+                                    "Pressure: " + loadedData.weatherInfo.main.pressure.ToString() + " hpa\n" +
+                                    "Humidity: " + loadedData.weatherInfo.main.humidity.ToString() + " %\n" +
+                                    "Min temperature: " + Math.Round(loadedData.weatherInfo.main.temp_min, 0).ToString() + " °C\n" +
+                                    "Max temperature: " + Math.Round(loadedData.weatherInfo.main.temp_max, 0).ToString() + " °C\n";
         }
 
         private void dataForOtherDays(List<list> listName, TextBox field1, TextBox field2, string nazivSlike, Image poljeSlika)
