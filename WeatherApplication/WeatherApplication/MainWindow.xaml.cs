@@ -123,6 +123,109 @@ namespace WeatherApplication
             }
         }
 
+        private void addingHourData(List<list> listData)
+        {
+            int brojacTime = 1;
+
+            var fullFilePath = $"http://openweathermap.org/img/w/{loadedData.weatherInfo.weather[0].icon}.png";
+            var fullFilePath0 = $"http://openweathermap.org/img/w/{loadedData.weatherForecast.list[0].weather[0].icon}.png";
+            var fullFilePath1 = $"http://openweathermap.org/img/w/{loadedData.weatherForecast.list[1].weather[0].icon}.png";
+            var fullFilePath2 = $"http://openweathermap.org/img/w/{loadedData.weatherForecast.list[2].weather[0].icon}.png";
+            var fullFilePath3 = $"http://openweathermap.org/img/w/{loadedData.weatherForecast.list[3].weather[0].icon}.png";
+            var fullFilePath4 = $"http://openweathermap.org/img/w/{loadedData.weatherForecast.list[4].weather[0].icon}.png";
+            var fullFilePath5 = $"http://openweathermap.org/img/w/{loadedData.weatherForecast.list[5].weather[0].icon}.png";
+            var fullFilePath6 = $"http://openweathermap.org/img/w/{loadedData.weatherForecast.list[6].weather[0].icon}.png";
+            var fullFilePath7 = $"http://openweathermap.org/img/w/{loadedData.weatherForecast.list[7].weather[0].icon}.png";
+
+
+            foreach (list l in listData)
+            {
+                if (brojacTime == 1)
+                {
+
+                    clock1.Text = l.dt_txt.Split(' ')[1].Split(':')[0] + ":" + l.dt_txt.Split(' ')[1].Split(':')[1];
+                    time1.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.main.speed.ToString() + " m/s\n" + l.weather[0].description;
+                    BitmapImage bitmap0 = new BitmapImage();
+                    bitmap0.BeginInit();
+                    bitmap0.UriSource = new Uri(fullFilePath0, UriKind.Absolute);
+                    bitmap0.EndInit();
+                    WeatherIcon_Copy0.Source = bitmap0;
+                }
+                else if (brojacTime == 2)
+                {
+                    clock2.Text = l.dt_txt.Split(' ')[1].Split(':')[0] + ":" + l.dt_txt.Split(' ')[1].Split(':')[1];
+                    time2.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.main.speed.ToString() + " m/s\n" + l.weather[0].description;
+                    BitmapImage bitmap1 = new BitmapImage();
+                    bitmap1.BeginInit();
+                    bitmap1.UriSource = new Uri(fullFilePath1, UriKind.Absolute);
+                    bitmap1.EndInit();
+                    WeatherIcon_Copy1.Source = bitmap1;
+                }
+                else if (brojacTime == 3)
+                {
+                    clock3.Text = l.dt_txt.Split(' ')[1].Split(':')[0] + ":" + l.dt_txt.Split(' ')[1].Split(':')[1];
+                    time3.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.main.speed.ToString() + " m/s\n" + l.weather[0].description;
+                    BitmapImage bitmap2 = new BitmapImage();
+                    bitmap2.BeginInit();
+                    bitmap2.UriSource = new Uri(fullFilePath2, UriKind.Absolute);
+                    bitmap2.EndInit();
+                    WeatherIcon_Copy2.Source = bitmap2;
+                }
+                else if (brojacTime == 4)
+                {
+                    clock4.Text = l.dt_txt.Split(' ')[1].Split(':')[0] + ":" + l.dt_txt.Split(' ')[1].Split(':')[1];
+                    time4.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.main.speed.ToString() + " m/s\n" + l.weather[0].description;
+                    BitmapImage bitmap3 = new BitmapImage();
+                    bitmap3.BeginInit();
+                    bitmap3.UriSource = new Uri(fullFilePath3, UriKind.Absolute);
+                    bitmap3.EndInit();
+                    WeatherIcon_Copy3.Source = bitmap3;
+                }
+                else if (brojacTime == 5)
+                {
+                    clock5.Text = l.dt_txt.Split(' ')[1].Split(':')[0] + ":" + l.dt_txt.Split(' ')[1].Split(':')[1];
+                    time5.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.main.speed.ToString() + " m/s\n" + l.weather[0].description;
+                    BitmapImage bitmap4 = new BitmapImage();
+                    bitmap4.BeginInit();
+                    bitmap4.UriSource = new Uri(fullFilePath4, UriKind.Absolute);
+                    bitmap4.EndInit();
+                    WeatherIcon_Copy4.Source = bitmap4;
+                }
+                else if (brojacTime == 6)
+                {
+                    clock6.Text = l.dt_txt.Split(' ')[1].Split(':')[0] + ":" + l.dt_txt.Split(' ')[1].Split(':')[1];
+                    time6.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.main.speed.ToString() + " m/s\n" + l.weather[0].description;
+                    BitmapImage bitmap5 = new BitmapImage();
+                    bitmap5.BeginInit();
+                    bitmap5.UriSource = new Uri(fullFilePath5, UriKind.Absolute);
+                    bitmap5.EndInit();
+                    WeatherIcon_Copy5.Source = bitmap5;
+                }
+                else if (brojacTime == 7)
+                {
+                    clock7.Text = l.dt_txt.Split(' ')[1].Split(':')[0] + ":" + l.dt_txt.Split(' ')[1].Split(':')[1];
+                    time7.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.main.speed.ToString() + " m/s\n" + l.weather[0].description;
+                    BitmapImage bitmap6 = new BitmapImage();
+                    bitmap6.BeginInit();
+                    bitmap6.UriSource = new Uri(fullFilePath6, UriKind.Absolute);
+                    bitmap6.EndInit();
+                    WeatherIcon_Copy6.Source = bitmap6;
+                }
+                else if (brojacTime == 8)
+                {
+                    clock8.Text = l.dt_txt.Split(' ')[1].Split(':')[0] + ":" + l.dt_txt.Split(' ')[1].Split(':')[1];
+                    time8.Text = Math.Round((l.main.temp - 273), 0) + "°C\n" + l.main.speed.ToString() + " m/s\n" + l.weather[0].description;
+                    BitmapImage bitmap7 = new BitmapImage();
+                    bitmap7.BeginInit();
+                    bitmap7.UriSource = new Uri(fullFilePath7, UriKind.Absolute);
+                    bitmap7.EndInit();
+                    WeatherIcon_Copy7.Source = bitmap7;
+                }
+                brojacTime++;
+            }
+
+        }
+
         private void checkBox_Click(object sender, RoutedEventArgs e)
         {
             City = this.CityText.Text;
