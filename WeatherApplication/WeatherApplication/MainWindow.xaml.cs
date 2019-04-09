@@ -23,11 +23,93 @@ namespace WeatherApplication
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+
+        public ObservableCollection<string> Favourites { get; set; }
+        public ObservableCollection<string> PomocniFavourites { get; set; }
+        int brojacTrazenja = 0;
+        public string City
+        {
+            get; set;
+        }
         WeatherLoader loadedData;
        
 
+        public void ReadFavourites()
+        {
+
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string path = System.IO.Path.Combine(currentDirectory, "Favourites.txt");
+
+            if (!File.Exists(path))
+            {
+                using (StreamWriter sw = File.CreateText(path))
+                {
+
+                    sw.Close();
+
+                }
+
+            }
+            try
+            {
+                using (StreamReader sr = File.OpenText(path))
+                {
+                    string s = "";
+                    while ((s = sr.ReadLine()) != null)
+                    {
+                        Favourites.Add(s);
+                        PomocniFavourites.Add(s.ToUpper());
+                    }
+                }
+            }
+            catch (FileNotFoundException fnf)
+            {
+
+            }
+        }
+        public void WriteFavorites()
+        {
+
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string path = System.IO.Path.Combine(currentDirectory, "Favourites.txt");
+
+            if (!File.Exists(path))
+            {
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    foreach (var item in Favourites)
+                    {
+                        sw.WriteLine(item);
+                    }
+
+                    sw.Close();
+                }
+            }
+            else
+            {
+                try
+                {
+                    using (var sw = new StreamWriter(path, false))
+                    {
+                        foreach (var item in Favourites)
+                        {
+                            sw.WriteLine(item);
+                        }
+
+                        sw.Close();
+
+                    }
+                }
+                catch (FileNotFoundException fnf)
+                {
+
+                }
+            }
+
+        }
+
        
+
         public MainWindow()
         {
            
