@@ -63,7 +63,7 @@ namespace WeatherApplication
             }
             catch (FileNotFoundException fnf)
             {
-
+                Console.WriteLine(fnf.ToString());
             }
         }
         public void WriteFavorites()
@@ -101,7 +101,7 @@ namespace WeatherApplication
                 }
                 catch (FileNotFoundException fnf)
                 {
-
+                    Console.WriteLine(fnf.ToString());
                 }
             }
 
@@ -165,7 +165,7 @@ namespace WeatherApplication
 
         private void dataForDefault()
         {
-            //DUSAN
+            changeWindowInfo();
         }
 
         private void fillInLists(List<list> l1, List<list> l2, List<list> l3, List<list> l4, List<list> l5,
