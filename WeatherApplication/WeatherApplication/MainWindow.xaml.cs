@@ -108,6 +108,21 @@ namespace WeatherApplication
 
         }
 
+        private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            String cbi = (String)(sender as ComboBox).SelectedItem;
+            City = cbi;
+            bool success = loadedData.updateCity(City);
+            if (success)
+            {
+                update.Text = "Last updated: " + string.Format("{0:HH:mm:ss}", DateTime.Now);
+                this.errorMessage.Content = "";
+                this.CityText.Text = City;
+                changeWindowInfo();
+            }
+        }
+
         private void checkBox_Click(object sender, RoutedEventArgs e)
         {
             City = this.CityText.Text;
