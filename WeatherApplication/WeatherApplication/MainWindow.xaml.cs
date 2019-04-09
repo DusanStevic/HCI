@@ -242,7 +242,43 @@ namespace WeatherApplication
 
         private void dataForOtherDays(List<list> listName, TextBox field1, TextBox field2, string nazivSlike, Image poljeSlika)
         {
-            //SONJA
+            double min = 1000;
+            double max = -1000;
+            foreach (list l in listName)
+            {
+                if (l.main.temp < min)
+                {
+                    min = l.main.temp;
+                }
+
+                if (l.main.temp > max)
+                {
+                    max = l.main.temp;
+                }
+            }
+
+            String datumString = listName[0].dt_txt;
+            DateTime dateTime = DateTime.Parse(datumString,
+                          System.Globalization.CultureInfo.InvariantCulture);
+            int broj = 0;
+            try
+            {
+                broj = Int32.Parse(listName[0].dt_txt.Split(' ')[0].Split('-')[2]);
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            field1.Text = /*listName[0].dt_txt.Split(' ')[0];//datum*/dateTime.DayOfWeek.ToString() + " " + broj.ToString();
+            field2.Text = Math.Round((min - 273), 0) + "°/" + Math.Round((max - 273), 0) + "°" + "\n" + listName[0].weather[0].description + "\n" + listName[0].main.pressure + " hpa";
+
+
+            var slika = $"http://openweathermap.org/img/w/{nazivSlike}.png";
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri(slika, UriKind.Absolute);
+            bitmap.EndInit();
+            poljeSlika.Source = bitmap;
         }
 
         private void addingHourData(List<list> listData)
