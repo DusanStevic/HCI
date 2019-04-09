@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +23,14 @@ namespace WeatherApplication
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         WeatherLoader loadedData;
+       
+
+       
         public MainWindow()
         {
+           
             Locator locator = new Locator();
             string errorMessage = "";
             if (locator._lat != -11111 && locator._lon != -11111)
@@ -36,7 +44,15 @@ namespace WeatherApplication
                 errorMessage = "Could not find your location. Please search the city for which you want to see the weather forecast.";
                 loadedData = new WeatherLoader("London");
             }
-            InitializeComponent();
+            
+            
+
         }
+
+      
+
+      
+
+      
     }
 }
